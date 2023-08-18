@@ -2,7 +2,7 @@
 Code ESPHome pour LILYGO TTGO T-Display 1.14 Pouces LCD + ESP32 Module sans Fil  Permet d'afficher les relevés de Flipr
 
 Les pré requis sont:
-avoir acheté une carte LILYGO TTGO T-Display 1.14 Pouces LCD + ESP32 
+avoir acheté une carte LILYGO TTGO T-Display 1.14 Pouces LCD + ESP32
 avoir un Flipr et activé son compte Flipr Analysr
 avoir installé Home Assistant, et l'intégration Flipr
 avoir relevé et remplacé dans le code.yaml le nom des entités 1 à 6 par celles de votre intégration
