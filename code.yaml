@@ -36,6 +36,14 @@ substitutions:
   entity6: sensor.flipr_N°de serie de votre Flipr_last_measured
   icon_signal: signal
 
+# ici, réglage des valeurs pour la gestion des couleurs:
+  temp_mini: "26"
+  temp_maxi: "31"
+  ph_mini: "7"
+  ph_maxi: "7.4"
+  chlore_mini: "0.5"
+  chlore_maxi: "3"
+
 #
 # Dans le reste du code, tout est variabilisé sur les labels de substitution
 #
@@ -196,38 +204,38 @@ display:
       bool statutph = statut_ph->state;
 
       it.printf(0, 0, id(sfcompact_25), id(my_blanc), TextAlign::TOP_LEFT, "Chlore    pH     Temp", id(niveau_ph).state);
-      it.line(0, 88, 240, 88);
+      it.line(0, 88, 149, 88);
       it.line(85, 0, 85, 135);
       it.line(149, 0, 149, 135);
 
-      if (id(temp_eau).state < 26) {
+      if (id(temp_eau).state < ${temp_mini}) {
         it.printf(150, 35, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "%.1f", id(temp_eau).state);
         it.printf(180, 90, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "°C", id(niveau_ph).state);
       }
-      else if (id(temp_eau).state > 30) {
+      else if (id(temp_eau).state > ${temp_maxi}) {
         it.printf(150, 35, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "%.1f", id(temp_eau).state);
         it.printf(180, 90, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "°C", id(niveau_ph).state);
       }
-      else if (id(temp_eau).state >= 26 && id(temp_eau).state <= 30 ) {
+      else if (id(temp_eau).state >= ${temp_mini} && id(temp_eau).state <=${temp_maxi} ) {
         it.printf(150, 35, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "%.1f", id(temp_eau).state);
         it.printf(180, 90, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "°C", id(niveau_ph).state);
       }
-      if (id(niveau_chlore).state < 0.5) {
+      if (id(niveau_chlore).state < ${chlore_mini}) {
         it.printf(0, 90, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "%.1f", id(niveau_chlore).state);
       }
-      else if (id(niveau_chlore).state > 3) {
+      else if (id(niveau_chlore).state > ${chlore_maxi}) {
         it.printf(0, 90, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "%.1f", id(niveau_chlore).state);
       }
-      else if (id(niveau_chlore).state >= 0.5 && id(niveau_chlore).state <= 3){
+      else if (id(niveau_chlore).state >= ${chlore_mini} && id(niveau_chlore).state <= ${chlore_maxi}){
         it.printf(0, 90, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "%.1f", id(niveau_chlore).state);
       }
-      if (id(niveau_ph).state >7.4) {
+      if (id(niveau_ph).state > ${ph_maxi}) {
         it.printf(88, 90, id(sfcompact_37), id(my_red), TextAlign::TOP_LEFT, "%.1f", id(niveau_ph).state);
       }
-      else if (id(niveau_ph).state < 7) {
+      else if (id(niveau_ph).state < ${ph_mini}) {
         it.printf(88, 90, id(sfcompact_37), id(my_red), TextAlign::TOP_LEFT, "%.1f", id(niveau_ph).state);
       }
-      else if (id(niveau_ph).state >= 7 && id(niveau_ph).state <= 7.4) {
+      else if (id(niveau_ph).state >= ${ph_mini} && id(niveau_ph).state <= ${ph_maxi}) {
         it.printf(88, 90, id(sfcompact_37), id(my_green), TextAlign::TOP_LEFT, "%.1f", id(niveau_ph).state);
       }
       if (statutchlore) {
