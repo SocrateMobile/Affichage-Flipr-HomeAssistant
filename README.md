@@ -21,7 +21,7 @@ Si des valeurs sont en dehors des limites définies, elles apparaissent en jaune
 Les valeurs de Chlore et pH peuvent être en rouge, avec des indications OK, c est parceque l'IA Flipr ne voit pas de problème à régler,
 juste patienter et surveiller 
 
-Prochaine étape pour moi, acheter une imprimante 3D et imprimer le boitier 
-
+Prochaine étape pour moi, acheter une imprimante 3D et imprimer le boitier dispo ici : 
+https://github.com/Xinyuan-LilyGO/TTGO-T-Display/tree/master/3d_file
 
 ![alt text](https://github.com/Xinyuan-LilyGO/TTGO-T-Display/raw/master/image/image4.jpg)
