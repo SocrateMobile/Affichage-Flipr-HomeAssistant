@@ -11,3 +11,7 @@ Si des valeurs sont en dehors des limites définies, elles apparaissent en jaune
 
 ![alt text](https://github.com/SocrateMobile/Affichage-Flipr-HomeAssistant/blob/main/view_pb.jpg?raw=true)
 
+Les valeurs de Chlore et pH peuvent être en rouge, avec des indications OK, c est parceque l'IA Flipr ne voit pas de problème à régler,
+juste patienter et surveiller 
+
+
