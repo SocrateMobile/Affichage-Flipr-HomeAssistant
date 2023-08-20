@@ -1,6 +1,11 @@
 # Affichage-Flipr-HomeAssistant
 Code ESPHome pour LILYGO TTGO T-Display 1.14 Pouces LCD + ESP32 Module sans Fil  Permet d'afficher les relevés de Flipr
 
+Voici la version finale (pour le moment, car il y a encore les deux boutons à exploiter...) 
+
+![alt text](https://github.com/SocrateMobile/Affichage-Flipr-HomeAssistant/blob/main/avecbox.jpg?raw=true)
+
+
 Les pré requis sont d'avoir:
 - acheté une carte LILYGO TTGO T-Display 1.14 Pouces LCD + ESP32
 - acheté un Flipr et activé son compte Flipr Analysr
@@ -43,7 +48,8 @@ le code2.yaml, ajoute des logos qui remplacent aventageusement le texte OK ou PB
 
 ![alt text](https://github.com/SocrateMobile/Affichage-Flipr-HomeAssistant/blob/main/aveclogo.jpg?raw=true)
 
-Prochaine étape pour moi, acheter une imprimante 3D et imprimer le boitier dispo ici : 
+Vous pouvez ensuite imprimer la boite qui va bien... 
+
 https://github.com/Xinyuan-LilyGO/TTGO-T-Display/tree/master/3d_file
 
 ![alt text](https://github.com/Xinyuan-LilyGO/TTGO-T-Display/raw/master/image/image4.jpg)
