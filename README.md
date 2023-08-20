@@ -17,6 +17,11 @@ mdp_hotspot: "la clé du hotspot de votre ESP en cas de plantage"
 server_username: le login que vous souhaitez pour accéder à l interface WEB de votre ESP
 server_password: le MDP que vous souhaitez pour accéder à l interface WEB de votre ESP
 ```
+n'oubliez pas de télécharger votre font, pour ce code sfCompact ici : https://font.gooova.com/fonts/14164/sf-compact-font-family.html
+le fichier sera a insérer dans home assistant , dans le repertoir de ESPHome
+
+# si vous optez pour la version avec les logos, code2.yaml, vous devrez également mettre dans le repertoire ESPHome
+# les deux fichiers ok_logo.jpg et pb_logo.jpg 
 
 Ensuite, dans ESPHome, copier / coller le code présent dans le fichier code.yaml
 
@@ -34,9 +39,21 @@ Si des valeurs sont en dehors des limites définies, elles apparaissent en jaune
 Les valeurs de Chlore et pH peuvent être en rouge, avec des indications OK, c est parceque l'IA Flipr ne voit pas de problème à régler,
 juste patienter et surveiller 
 
+le code2.yaml, ajoute des logos qui remplacent aventageusement le texte OK ou PB du code initial
+
+![alt text](https://github.com/SocrateMobile/Affichage-Flipr-HomeAssistant/blob/main/aveclogo.jpg?raw=true)
+
+
+
+
+
 Prochaine étape pour moi, acheter une imprimante 3D et imprimer le boitier dispo ici : 
 https://github.com/Xinyuan-LilyGO/TTGO-T-Display/tree/master/3d_file
 
 ![alt text](https://github.com/Xinyuan-LilyGO/TTGO-T-Display/raw/master/image/image4.jpg)
+
+
+
+
 
 Have fun ;-)
