@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ESPHome compile cache & builds
+.esphome/
+
+# Secrets réels (ne jamais commiter les vrais mots de passe)
+secrets.yaml

@@ -110,84 +110,84 @@ color:
     blue: 0%
 
 image:
-  - file: "alert.jpg"
+  - file: "images/alert.jpg"
     id: pb_logo
     resize: 50x50
     type: RGB24
 
-  - file: "check-circle.jpg"
+  - file: "images/check-circle.jpg"
     id: ok_logo
     resize: 50x50
     type: RGB24
 
-  - file: "piscine.png"
+  - file: "images/piscine.png"
     id: piscine
     resize: 80x80
     type: RGB24
-  - file: "ba_0.png"
+  - file: "images/ba_0.png"
     id: bat_0
     resize: 35x35
     type: RGB24
-  - file: "ba_20.png"
+  - file: "images/ba_20.png"
     id: bat_20
     resize: 35x35
     type: RGB24
-  - file: "ba_40.png"
+  - file: "images/ba_40.png"
     id: bat_40
     resize: 35x35
     type: RGB24
-  - file: "ba_60.png"
+  - file: "images/ba_60.png"
     id: bat_60
     resize: 35x35
     type: RGB24
-  - file: "ba_80.png"
+  - file: "images/ba_80.png"
     id: bat_80
     resize: 35x35
     type: RGB24
-  - file: "ba_100.png"
+  - file: "images/ba_100.png"
     id: bat_100
     resize: 35x35
     type: RGB24
 
-  - file: "bav_0.png"
+  - file: "images/bav_0.png"
     id: batv_0
     resize: 60x60
     type: RGB24
-  - file: "bav_20.png"
+  - file: "images/bav_20.png"
     id: batv_20
     resize: 60x60
     type: RGB24
-  - file: "bav_40.png"
+  - file: "images/bav_40.png"
     id: batv_40
     resize: 60x60
     type: RGB24
-  - file: "bav_60.png"
+  - file: "images/bav_60.png"
     id: batv_60
     resize: 60x60
     type: RGB24
-  - file: "bav_80.png"
+  - file: "images/bav_80.png"
     id: batv_80
     resize: 60x60
     type: RGB24
-  - file: "bav_100.png"
+  - file: "images/bav_100.png"
     id: batv_100
     resize: 60x60
     type: RGB24
 
-  - file: "piscine_on.png"
+  - file: "images/piscine_on.png"
     id: piscine_on
     resize: 60x60
     type: RGB24
-  - file: "piscine_off.png"
+  - file: "images/piscine_off.png"
     id: piscine_off
     resize: 60x60
     type: RGB24
 
-  - file: "lampe_on.png"
+  - file: "images/lampe_on.png"
     id: ampoule_on
     resize: 30x30
     type: RGB24
-  - file: "black.png"
+  - file: "images/black.png"
     id: black
     resize: 30x30
     type: RGB24

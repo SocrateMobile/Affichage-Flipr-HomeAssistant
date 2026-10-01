@@ -103,12 +103,12 @@ color:
     blue: 0%
 
 image:
-  - file: "alert.jpg"
+  - file: "images/alert.jpg"
     id: pb_logo
     resize: 50x50
     type: RGB24
 
-  - file: "check-circle.jpg"
+  - file: "images/check-circle.jpg"
     id: ok_logo
     resize: 50x50
     type: RGB24
