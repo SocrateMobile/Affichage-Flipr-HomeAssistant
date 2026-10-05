@@ -13,6 +13,8 @@
 
 ---
 
+[![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Buy+me+a+coffee&emoji=☕&slug=Socrate&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/Socrate)
+
 ## 📖 Présentation
 
 Ce projet permet d'afficher en temps réel et de manière autonome les relevés de votre sonde connectée de piscine **Flipr** sur un écran couleur compact **LILYGO TTGO T-Display 1.14" (ESP32)**.
