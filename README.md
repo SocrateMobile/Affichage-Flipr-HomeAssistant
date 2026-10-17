@@ -9,6 +9,7 @@
   <a href="https://www.home-assistant.io"><img src="https://img.shields.io/badge/Home%20Assistant-2023+-41BDF5.svg?logo=home-assistant&logoColor=white" alt="Home Assistant"></a>
   <a href="https://github.com/Xinyuan-LilyGO/TTGO-T-Display"><img src="https://img.shields.io/badge/Hardware-LILYGO%20TTGO%20T--Display-orange.svg" alt="Hardware"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
+  <a href="https://buymeacoffee.com/Socrate"><img src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Socrate-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=000000" alt="Buy Me A Coffee"></a>
 </p>
 
 ---
@@ -68,13 +69,13 @@ Le dépôt propose 3 configurations progressives selon vos besoins :
 Dans votre dossier Home Assistant `/config/esphome/` :
 1. Choisissez et copiez l'une des configurations YAML (ex: [`flipr_display_v3.yaml`](esphome/flipr_display_v3.yaml)).
 2. Copiez le sous-dossier [`esphome/images/`](esphome/images/) contenant les icônes.
-3. Téléchargez la police TrueType [**SF Compact**](https://font.gooova.com/fonts/14164/sf-compact-font-family.html) et nommez-la `SFCompact.ttf` dans votre dossier `/config/esphome/`.
+3. *(Optionnel)* La police **Roboto** est désormais téléchargée automatiquement via Google Fonts (`gfonts://Roboto`). Si vous préférez une police locale personnalisée, vous pouvez placer un fichier `SFCompact.ttf` dans votre dossier `/config/esphome/`.
 
 ### 2. Configuration des secrets (`secrets.yaml`)
 Créez ou complétez le fichier `/config/esphome/secrets.yaml` (modèle fourni dans [`secrets.yaml.example`](secrets.yaml.example)) :
 
 ```yaml
-key_display_p: "votre_cle_chiffrement_api_esphome"
+key_display_p: "AtXoonpQkrzwLkov2i3voArhmv6JCGwRnsXEBuxe8LU="  # Clé base64 de 32 octets générée par ESPHome
 ota_display_p: "votre_mot_de_passe_ota"
 wifi_ssid: "Mon_Reseau_WiFi"
 wifi_password: "Mon_Mot_De_Passe_WiFi"
@@ -154,6 +155,15 @@ Affichage-Flipr-HomeAssistant/
 ```
 
 ---
+---
+
+## ☕ Soutenir le projet / Support
+
+Si vous appréciez cette intégration et souhaitez soutenir son développement continu ainsi que la maintenance des futures versions :
+
+<a href="https://buymeacoffee.com/Socrate" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50" width="210">
+</a>
 
 ## 🤝 Contribution & Remerciements
 

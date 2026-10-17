@@ -25,15 +25,15 @@ substitutions:
 
 # indiquez ici les sensors de votre Flipr: 
 
-  entity1: sensor.flipr_N°de serie de votre Flipr_water_temperature
-  entity2: sensor.flipr_N°de serie de votre Flipr_ph
-  entity3: sensor.flipr_N°de serie de votre Flipr_chlorine
+  entity1: sensor.flipr_XXXXXXXX_water_temperature
+  entity2: sensor.flipr_XXXXXXXX_ph
+  entity3: sensor.flipr_XXXXXXXX_chlorine
   
 # indiquez ici les binary sensors de votre Flipr:
 
-  entity4: binary_sensor.flipr_N°de serie de votre Flipr_chlorine_status
-  entity5: binary_sensor.flipr_N°de serie de votre Flipr_ph_status
-  entity6: sensor.flipr_N°de serie de votre Flipr_last_measured
+  entity4: binary_sensor.flipr_XXXXXXXX_chlorine_status
+  entity5: binary_sensor.flipr_XXXXXXXX_ph_status
+  entity6: sensor.flipr_XXXXXXXX_last_measured
   icon_signal: signal
 
 # ici, réglage des valeurs pour la gestion des couleurs:
@@ -50,8 +50,11 @@ substitutions:
 
 esphome:
   name: ${devicename}
-  platform: ESP32
+
+esp32:
   board: featheresp32
+  framework:
+    type: arduino
 
 # Enable logging
 logger:
@@ -59,8 +62,10 @@ logger:
 api:
   encryption:
     key: !secret key_display_p
+
 ota:
-  password: !secret ota_display_p
+  - platform: esphome
+    password: !secret ota_display_p
 
 # Ici, on lance la connexion de l'ESP8266 à votre WIFI, 
 # les paramètres sont à remplir plus haut, et dans le fichier secret.yaml
@@ -77,7 +82,9 @@ wifi:
 # Ici, on active le serveur WEB du ESP8266, en allant sur l'IP du ESP8266, on tombe sur une interface pour piloter les relais
 web_server:
   port: 80
+  version: 3
   auth:
+    type: basic
     username: !secret server_username
     password: !secret server_password
 
@@ -102,13 +109,13 @@ color:
     blue: 100%
 
 font:
-  - file: "SFCompact.ttf"
+  - file: "gfonts://Roboto"
     id: sfcompact_40
     size: 40
-  - file: "SFCompact.ttf"
+  - file: "gfonts://Roboto"
     id: sfcompact_37
     size: 37
-  - file: "SFCompact.ttf"
+  - file: "gfonts://Roboto"
     id: sfcompact_25
     size: 25
 
@@ -138,10 +145,6 @@ binary_sensor:
     id: statut_ph
     name: "Statut pH: "
     entity_id: ${entity5}
-  - platform: homeassistant
-    id: derniere_analyse
-    name: "Derniere analyse: "
-    entity_id: ${entity6}
     
 sensor:
   - platform: homeassistant
@@ -182,6 +185,10 @@ text_sensor:
     bssid:
       name: "BSSID :"   
       icon: "mdi:${icon_signal}"
+  - platform: homeassistant
+    id: derniere_analyse
+    name: "Dernière analyse"
+    entity_id: ${entity6}
 
 time:
   - platform: homeassistant
@@ -202,51 +209,65 @@ display:
     lambda: |-
       bool statutchlore = statut_chlore->state;
       bool statutph = statut_ph->state;
+      float eautemp = id(temp_eau).state;
+      float chloreniveau = id(niveau_chlore).state;
+      float phniveau = id(niveau_ph).state;
 
-      it.printf(0, 0, id(sfcompact_25), id(my_blanc), TextAlign::TOP_LEFT, "Chlore    pH     Temp", id(niveau_ph).state);
+      it.print(0, 0, id(sfcompact_25), id(my_blanc), TextAlign::TOP_LEFT, "Chlore    pH     Temp");
       it.line(0, 88, 149, 88);
       it.line(85, 0, 85, 135);
       it.line(149, 0, 149, 135);
 
-      if (id(temp_eau).state < ${temp_mini}) {
-        it.printf(150, 35, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "%.1f", id(temp_eau).state);
-        it.printf(180, 90, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "°C", id(niveau_ph).state);
+      if (isnan(eautemp)) {
+        it.printf(150, 35, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "--.-");
+        it.print(180, 90, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "°C");
       }
-      else if (id(temp_eau).state > ${temp_maxi}) {
-        it.printf(150, 35, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "%.1f", id(temp_eau).state);
-        it.printf(180, 90, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "°C", id(niveau_ph).state);
+      else if (eautemp < ${temp_mini}) {
+        it.printf(150, 35, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "%.1f", eautemp);
+        it.print(180, 90, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "°C");
       }
-      else if (id(temp_eau).state >= ${temp_mini} && id(temp_eau).state <=${temp_maxi} ) {
-        it.printf(150, 35, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "%.1f", id(temp_eau).state);
-        it.printf(180, 90, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "°C", id(niveau_ph).state);
+      else if (eautemp > ${temp_maxi}) {
+        it.printf(150, 35, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "%.1f", eautemp);
+        it.print(180, 90, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "°C");
       }
-      if (id(niveau_chlore).state < ${chlore_mini}) {
-        it.printf(0, 90, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "%.1f", id(niveau_chlore).state);
+      else {
+        it.printf(150, 35, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "%.1f", eautemp);
+        it.print(180, 90, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "°C");
       }
-      else if (id(niveau_chlore).state > ${chlore_maxi}) {
-        it.printf(0, 90, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "%.1f", id(niveau_chlore).state);
+
+      if (isnan(chloreniveau)) {
+        it.printf(0, 90, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "--.-");
       }
-      else if (id(niveau_chlore).state >= ${chlore_mini} && id(niveau_chlore).state <= ${chlore_maxi}){
-        it.printf(0, 90, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "%.1f", id(niveau_chlore).state);
+      else if (chloreniveau < ${chlore_mini}) {
+        it.printf(0, 90, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "%.1f", chloreniveau);
       }
-      if (id(niveau_ph).state > ${ph_maxi}) {
-        it.printf(88, 90, id(sfcompact_37), id(my_red), TextAlign::TOP_LEFT, "%.1f", id(niveau_ph).state);
+      else if (chloreniveau > ${chlore_maxi}) {
+        it.printf(0, 90, id(sfcompact_40), id(my_yellow), TextAlign::TOP_LEFT, "%.1f", chloreniveau);
       }
-      else if (id(niveau_ph).state < ${ph_mini}) {
-        it.printf(88, 90, id(sfcompact_37), id(my_red), TextAlign::TOP_LEFT, "%.1f", id(niveau_ph).state);
+      else {
+        it.printf(0, 90, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "%.1f", chloreniveau);
       }
-      else if (id(niveau_ph).state >= ${ph_mini} && id(niveau_ph).state <= ${ph_maxi}) {
-        it.printf(88, 90, id(sfcompact_37), id(my_green), TextAlign::TOP_LEFT, "%.1f", id(niveau_ph).state);
+
+      if (isnan(phniveau)) {
+        it.printf(88, 90, id(sfcompact_37), id(my_yellow), TextAlign::TOP_LEFT, "--.-");
       }
+      else if (phniveau > ${ph_maxi} || phniveau < ${ph_mini}) {
+        it.printf(88, 90, id(sfcompact_37), id(my_red), TextAlign::TOP_LEFT, "%.1f", phniveau);
+      }
+      else {
+        it.printf(88, 90, id(sfcompact_37), id(my_green), TextAlign::TOP_LEFT, "%.1f", phniveau);
+      }
+
       if (statutchlore) {
-        it.printf(0, 35, id(sfcompact_40),id(my_red), TextAlign::TOP_LEFT,"PB", id(statut_chlore).state);
+        it.print(0, 35, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "PB");
       }
       else {
-        it.printf(0, 35, id(sfcompact_40),id(my_green), TextAlign::TOP_LEFT,"OK", id(statut_chlore).state);
+        it.print(0, 35, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "OK");
       }
-         if (statutph) {
-        it.printf(88, 35, id(sfcompact_40),id(my_red), TextAlign::TOP_LEFT,"PB", id(statut_ph).state);
+
+      if (statutph) {
+        it.print(88, 35, id(sfcompact_40), id(my_red), TextAlign::TOP_LEFT, "PB");
       }
       else {
-        it.printf(88, 35, id(sfcompact_40),id(my_green), TextAlign::TOP_LEFT,"OK", id(statut_ph).state);
+        it.print(88, 35, id(sfcompact_40), id(my_green), TextAlign::TOP_LEFT, "OK");
       }

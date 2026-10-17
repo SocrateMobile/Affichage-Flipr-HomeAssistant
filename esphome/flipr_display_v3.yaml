@@ -49,13 +49,12 @@ substitutions:
 
 esphome:
   name: ${devicename}
-  platform: ESP32
-  board: featheresp32
-#  on_boot:
-#    priority: -10
-#    then:
 
-        
+esp32:
+  board: featheresp32
+  framework:
+    type: arduino
+
 # Enable logging
 logger:
   logs:
@@ -64,8 +63,10 @@ logger:
 api:
   encryption:
     key: !secret key_display_p
+
 ota:
-  password: !secret ota_display_p
+  - platform: esphome
+    password: !secret ota_display_p
 
 # Ici, on lance la connexion de l'ESP8266 à votre WIFI, 
 # les paramètres sont à remplir plus haut, et dans le fichier secret.yaml
@@ -81,7 +82,9 @@ wifi:
 # Ici, on active le serveur WEB du ESP8266, en allant sur l'IP du ESP8266, on tombe sur une interface pour piloter les relais
 web_server:
   port: 80
+  version: 3
   auth:
+    type: basic
     username: !secret server_username
     password: !secret server_password
 
@@ -110,104 +113,123 @@ color:
     blue: 0%
 
 image:
-  - file: "images/alert.jpg"
+  - platform: file
+    file: "images/alert.jpg"
     id: pb_logo
     resize: 50x50
-    type: RGB24
+    type: RGB
 
-  - file: "images/check-circle.jpg"
+  - platform: file
+    file: "images/check-circle.jpg"
     id: ok_logo
     resize: 50x50
-    type: RGB24
+    type: RGB
 
-  - file: "images/piscine.png"
+  - platform: file
+    file: "images/piscine.png"
     id: piscine
     resize: 80x80
-    type: RGB24
-  - file: "images/ba_0.png"
+    type: RGB
+  - platform: file
+    file: "images/ba_0.png"
     id: bat_0
     resize: 35x35
-    type: RGB24
-  - file: "images/ba_20.png"
+    type: RGB
+  - platform: file
+    file: "images/ba_20.png"
     id: bat_20
     resize: 35x35
-    type: RGB24
-  - file: "images/ba_40.png"
+    type: RGB
+  - platform: file
+    file: "images/ba_40.png"
     id: bat_40
     resize: 35x35
-    type: RGB24
-  - file: "images/ba_60.png"
+    type: RGB
+  - platform: file
+    file: "images/ba_60.png"
     id: bat_60
     resize: 35x35
-    type: RGB24
-  - file: "images/ba_80.png"
+    type: RGB
+  - platform: file
+    file: "images/ba_80.png"
     id: bat_80
     resize: 35x35
-    type: RGB24
-  - file: "images/ba_100.png"
+    type: RGB
+  - platform: file
+    file: "images/ba_100.png"
     id: bat_100
     resize: 35x35
-    type: RGB24
+    type: RGB
 
-  - file: "images/bav_0.png"
+  - platform: file
+    file: "images/bav_0.png"
     id: batv_0
     resize: 60x60
-    type: RGB24
-  - file: "images/bav_20.png"
+    type: RGB
+  - platform: file
+    file: "images/bav_20.png"
     id: batv_20
     resize: 60x60
-    type: RGB24
-  - file: "images/bav_40.png"
+    type: RGB
+  - platform: file
+    file: "images/bav_40.png"
     id: batv_40
     resize: 60x60
-    type: RGB24
-  - file: "images/bav_60.png"
+    type: RGB
+  - platform: file
+    file: "images/bav_60.png"
     id: batv_60
     resize: 60x60
-    type: RGB24
-  - file: "images/bav_80.png"
+    type: RGB
+  - platform: file
+    file: "images/bav_80.png"
     id: batv_80
     resize: 60x60
-    type: RGB24
-  - file: "images/bav_100.png"
+    type: RGB
+  - platform: file
+    file: "images/bav_100.png"
     id: batv_100
     resize: 60x60
-    type: RGB24
+    type: RGB
 
-  - file: "images/piscine_on.png"
+  - platform: file
+    file: "images/piscine_on.png"
     id: piscine_on
     resize: 60x60
-    type: RGB24
-  - file: "images/piscine_off.png"
+    type: RGB
+  - platform: file
+    file: "images/piscine_off.png"
     id: piscine_off
     resize: 60x60
-    type: RGB24
+    type: RGB
 
-  - file: "images/lampe_on.png"
+  - platform: file
+    file: "images/lampe_on.png"
     id: ampoule_on
     resize: 30x30
-    type: RGB24
-  - file: "images/black.png"
+    type: RGB
+  - platform: file
+    file: "images/black.png"
     id: black
     resize: 30x30
-    type: RGB24
+    type: RGB
 
 font:
-  - file: "SFCompact.ttf"
+  - file: "gfonts://Roboto"
     id: sfcompact_38
     size: 38
     glyphs: 'éèà!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/'
 
-  - file: "SFCompact.ttf"
+  - file: "gfonts://Roboto"
     id: sfcompact_25
     size: 25
     glyphs: 'éèà!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/'
 
-  - file: "SFCompact.ttf"
+  - file: "gfonts://Roboto"
     id: sfcompact_55
     size: 55
     glyphs: 'éèà!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/'
-  - file: "SFCompact.ttf"
+  - file: "gfonts://Roboto"
     id: sfcompact_20
     size: 20
     glyphs: 'éèà!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/'
@@ -396,43 +418,34 @@ display:
           float phniveau = id(niveau_ph).state;
           float batterie= id(batterylevel)->state;
 
-          ESP_LOGD("my_page1", "lampe: %.1f%", lampe);
-          ESP_LOGD("my_page1", "statutph %.1f%", statutph);
-          ESP_LOGD("my_page1", "statutchlore: %.1f%", statutchlore);
-          ESP_LOGD("my_page1", "eautemp: %.1f%", eautemp);
-          ESP_LOGD("my_page1", "chloreniveau: %.1f%", chloreniveau);
-          ESP_LOGD("my_page1", "phniveau: %.1f%", phniveau);
-          ESP_LOGD("my_page1", "Battery Level: %.1f%", batterie);
-
           it.printf(0, 5, id(sfcompact_25), id(my_blanc), "Chlore   pH     °C");
           it.image(150, 45, id(piscine));
 
-          if (eautemp < ${temp_mini}) {
-            it.printf(150, 100, id(sfcompact_38), id(my_yellow), "%.1f", eautemp);
-          }
-          else if (eautemp > ${temp_maxi}) {
+          if (isnan(eautemp)) {
+            it.printf(150, 98, id(sfcompact_38), id(my_yellow), "--.-");
+          } else if (eautemp < ${temp_mini}) {
+            it.printf(150, 98, id(sfcompact_38), id(my_yellow), "%.1f", eautemp);
+          } else if (eautemp > ${temp_maxi}) {
             it.printf(150, 98, id(sfcompact_38), id(my_red), "%.1f", eautemp);
-          }
-          else if (eautemp >= ${temp_mini} && eautemp <=${temp_maxi} ) {
+          } else {
             it.printf(150, 98, id(sfcompact_38), id(my_green), "%.1f", eautemp);
+          }
 
-          }
-          if (chloreniveau < ${chlore_mini}) {
+          if (isnan(chloreniveau)) {
+            it.printf(0, 98, id(sfcompact_38), id(my_yellow), "--.-");
+          } else if (chloreniveau < ${chlore_mini}) {
             it.printf(0, 98, id(sfcompact_38), id(my_red), "%.1f", chloreniveau);
-          }
-          else if (chloreniveau > ${chlore_maxi}) {
+          } else if (chloreniveau > ${chlore_maxi}) {
             it.printf(0, 98, id(sfcompact_38), id(my_yellow), "%.1f", chloreniveau);
-          }
-          else if (chloreniveau >= ${chlore_mini} && chloreniveau <= ${chlore_maxi}){
+          } else {
             it.printf(0, 98, id(sfcompact_38), id(my_green), "%.1f", chloreniveau);
           }
-          if (phniveau > ${ph_maxi}) {
+
+          if (isnan(phniveau)) {
+            it.printf(80, 98, id(sfcompact_38), id(my_yellow), "--.-");
+          } else if (phniveau > ${ph_maxi} || phniveau < ${ph_mini}) {
             it.printf(80, 98, id(sfcompact_38), id(my_red), "%.1f", phniveau);
-          }
-          else if (phniveau < ${ph_mini}) {
-            it.printf(80, 98, id(sfcompact_38), id(my_red), "%.1f", phniveau);
-          }
-          else if (phniveau >= ${ph_mini} && phniveau <= ${ph_maxi}) {
+          } else {
             it.printf(80, 98, id(sfcompact_38), id(my_green), "%.1f", phniveau);
           }
           
@@ -486,8 +499,6 @@ display:
           float maj = id(derniere_analyse).state;
           float batterie= id(batterylevel)->state;
 
-          ESP_LOGD("my_page1", "Battery Level: %.1f%", maj);
-          
           if (batflip >= 90) {
               it.image(1, 32, batv_100);
           }
@@ -510,10 +521,26 @@ display:
 
           it.printf(70, 0, id(sfcompact_55), id(my_blanc), "%s", id(esptime).now().strftime("%H:%M").c_str());
 
-          it.printf(0, 60, id(sfcompact_25), id(my_blanc), "Redox: %.1f% mV", redoxx);
+          if (isnan(redoxx)) {
+            it.printf(0, 60, id(sfcompact_25), id(my_blanc), "Redox: --- mV");
+          } else {
+            it.printf(0, 60, id(sfcompact_25), id(my_blanc), "Redox: %.0f mV", redoxx);
+          }
 
           it.printf(0, 85, id(sfcompact_25), id(my_blanc), "Dernier relevé:");
-          it.printf(0, 110, id(sfcompact_25), id(my_green), "%.1f%", maj);
+          if (isnan(maj) || maj <= 0) {
+            it.printf(0, 110, id(sfcompact_25), id(my_green), "--:--");
+          } else {
+            time_t t = (time_t)maj;
+            struct tm *tm_info = localtime(&t);
+            if (tm_info) {
+              char buf[16];
+              strftime(buf, sizeof(buf), "%H:%M", tm_info);
+              it.printf(0, 110, id(sfcompact_25), id(my_green), "%s", buf);
+            } else {
+              it.printf(0, 110, id(sfcompact_25), id(my_green), "--:--");
+            }
+          }
 
       - id: my_page2
 
@@ -522,8 +549,6 @@ display:
           bool lampe = statut_lampe->state;
           bool statutph = statut_ph->state;
           float batterie= id(batterylevel)->state;
-
-          ESP_LOGD("my_page1", "lampe: %.1f%", lampe);
 
           if (lampe) {
           it.image(15, 47, id(piscine_on));
